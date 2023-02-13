@@ -9,6 +9,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -19,7 +20,7 @@ class Article(TimeStampedModel, SoftDeletableModel):
         max_length=50,
         verbose_name=('title')
     )
-    description = models.TextField(
+    description = RichTextField(
         verbose_name=('description'),
         blank=True
     )
