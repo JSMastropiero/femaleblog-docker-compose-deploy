@@ -8,6 +8,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .pagination import *
+from .models import UserVerification
 
 
 
@@ -34,6 +35,13 @@ class UserViewset(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('username', 'first_name', 'last_name')
+
+    def create(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        user_verification = UserVerification(email)
+        user = user_verification.create_user()
+        serializer = self.get_serializer(user)
+        return Response(serializer.data)
 
 
 class ArticleViewset(viewsets.ModelViewSet):

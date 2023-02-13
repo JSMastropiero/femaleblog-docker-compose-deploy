@@ -9,9 +9,24 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+import random
+import string
+
 from ckeditor.fields import RichTextField
 
 # Create your models here.
+
+class UserVerification:
+    def __init__(self, email):
+        self.email = email
+
+    def create_user(self):
+        password = ''.join(random.choice(string.ascii_letters + string.digits) for i in range(8))
+        user, created = User.objects.get_or_create(username=self.email, defaults={'email': self.email, 'password': password})
+        if not created:
+            user.set_password(password)
+            user.save()
+        return user
 
 
 class Article(TimeStampedModel, SoftDeletableModel):
