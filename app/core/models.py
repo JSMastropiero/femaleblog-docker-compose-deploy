@@ -21,11 +21,12 @@ class UserVerification:
         self.email = email
 
     def create_user(self):
-        password = ''.join(random.choice(string.ascii_letters + string.digits) for i in range(8))
-        user, created = User.objects.get_or_create(username=self.email, defaults={'email': self.email, 'password': password})
+        user, created = User.objects.get_or_create(username=self.email, defaults={'email': self.email})
         if not created:
-            user.set_password(password)
-            user.save()
+            return user
+        password = ''.join(random.choice(string.ascii_letters + string.digits) for i in range(8))
+        user.set_password(password)
+        user.save()
         return user
 
 
