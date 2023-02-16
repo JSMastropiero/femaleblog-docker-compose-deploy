@@ -23,11 +23,13 @@ class UserVerification:
     def create_user(self):
         user, created = User.objects.get_or_create(username=self.email, defaults={'email': self.email})
         if not created:
-            return user
+            token = Token.objects.get(user=user)
+            return user, token
         password = ''.join(random.choice(string.ascii_letters + string.digits) for i in range(8))
         user.set_password(password)
         user.save()
-        return user
+        token = Token.objects.create(user=user)
+        return user, token
 
 
 class Article(TimeStampedModel, SoftDeletableModel):
