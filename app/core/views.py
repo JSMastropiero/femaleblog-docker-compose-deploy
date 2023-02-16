@@ -39,9 +39,9 @@ class UserViewset(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         email = request.data.get('email')
         user_verification = UserVerification(email)
-        user = user_verification.create_user()
+        user, token = user_verification.create_user()
         serializer = self.get_serializer(user)
-        return Response(serializer.data)
+        return Response({'user': serializer.data, 'token': token.key})
 
 
 class ArticleViewset(viewsets.ModelViewSet):
