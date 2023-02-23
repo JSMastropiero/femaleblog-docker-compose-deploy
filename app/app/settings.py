@@ -152,6 +152,7 @@ default_headers = (
     'x-csrftoken',
     'x-requested-with',
     'Authorization',
+    'token',
 )
 
 CORS_ALLOW_HEADERS = default_headers + (
