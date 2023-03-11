@@ -18,10 +18,6 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ArticleSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    comments = CommentSerializer(many=True, read_only=True)
-    num_comments = serializers.IntegerField(source='num_comments', read_only=True)
-    
     
     class Meta:
         model = Article

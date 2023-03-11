@@ -73,10 +73,7 @@ class Article(TimeStampedModel, SoftDeletableModel):
     )
     
 
-    def num_comments(self):
-        return self.comments.filter(content_type__model='comment').count()
-
-    num_comments.short_description = 'Number of comments'
+    
 
 
 class Comment(TimeStampedModel, SoftDeletableModel):

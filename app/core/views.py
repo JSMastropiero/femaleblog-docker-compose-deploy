@@ -11,7 +11,8 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from .pagination import *
 from .models import UserVerification
 from rest_framework.views import APIView
-from django.db.models import Count, Q
+from django.db.models import Count
+from rest_framework import generics
 
 
 
@@ -64,15 +65,6 @@ class ArticleViewset(viewsets.ModelViewSet):
          serializer = self.get_serializer(obj)
          return Response(serializer.data)
 
-    def get_queryset(self):
-        queryset = Article.objects.all().annotate(num_comments=Count('comments', filter=Q(comments__content_type__model='comment')))
-        return queryset
-   
-    
-
-    
-    
-   
 
 
 class CommentViewset(viewsets.ModelViewSet):
@@ -104,3 +96,16 @@ class ArticleCommentCount(APIView):
         articles = Article.objects.all()
         serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data)
+
+
+class ArticleDetail(generics.RetrieveAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        num_comments = Comment.objects.filter(content_type__model='article', object_id=instance.id).count()
+        serializer = self.get_serializer(instance)
+        response_data = serializer.data
+        response_data['num_comments'] = num_comments
+        return Response(response_data)
