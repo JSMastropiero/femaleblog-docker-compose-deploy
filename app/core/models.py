@@ -72,6 +72,12 @@ class Article(TimeStampedModel, SoftDeletableModel):
 
     )
     
+    def num_comments(self):
+        
+        content_type = ContentType.objects.get_for_model(Article)
+        object_id = self.pk
+        return Comment.objects.filter(
+            content_type=content_type, object_id=object_id).count()
 
     
 
