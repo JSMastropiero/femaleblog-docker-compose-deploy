@@ -71,6 +71,12 @@ class Article(TimeStampedModel, SoftDeletableModel):
         default=0
 
     )
+    comment_count = models.PositiveBigIntegerField(
+        verbose_name=('comment count'),
+        default=0
+    )
+
+    
 
     class Meta():
         verbose_name=('article')
