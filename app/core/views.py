@@ -1,3 +1,4 @@
+from itertools import count
 from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework import viewsets
@@ -61,7 +62,10 @@ class ArticleViewset(viewsets.ModelViewSet):
          serializer = self.get_serializer(obj)
          return Response(serializer.data)
 
-
+    def get_queryset(self):
+        queryset = Article.objects.all().annotate(num_comments=count('comments'))
+        return queryset
+    
 
     
     

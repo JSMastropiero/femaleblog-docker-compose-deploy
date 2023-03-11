@@ -76,11 +76,10 @@ class Article(TimeStampedModel, SoftDeletableModel):
         default=0
     )
 
-    def save(self, *args, **kwargs):
-        self.comment_count = self.comments.count()
-        super().save(*args, **kwargs)
+    def num_comments(self):
+        return self.comments.count()
 
-    
+    num_comments.short_description = 'Number of comments'
 
     class Meta():
         verbose_name=('article')
