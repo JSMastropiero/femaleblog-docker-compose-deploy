@@ -71,22 +71,12 @@ class Article(TimeStampedModel, SoftDeletableModel):
         default=0
 
     )
-    comment_count = models.PositiveBigIntegerField(
-        verbose_name=('comment count'),
-        default=0
-    )
+    
 
     def num_comments(self):
-        return self.comments.count()
+        return self.comments.filter(content_type__model='comment').count()
 
     num_comments.short_description = 'Number of comments'
-
-    class Meta():
-        verbose_name=('article')
-        verbose_name_plural=('articles')
-
-    def __str__(self):
-        return self.title
 
 
 class Comment(TimeStampedModel, SoftDeletableModel):

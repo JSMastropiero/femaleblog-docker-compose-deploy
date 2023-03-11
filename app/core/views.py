@@ -11,6 +11,8 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from .pagination import *
 from .models import UserVerification
 from rest_framework.views import APIView
+from django.db.models import Count, Q
+
 
 
 
@@ -63,8 +65,9 @@ class ArticleViewset(viewsets.ModelViewSet):
          return Response(serializer.data)
 
     def get_queryset(self):
-        queryset = Article.objects.all().annotate(num_comments=count('comments'))
+        queryset = Article.objects.all().annotate(num_comments=Count('comments', filter=Q(comments__content_type__model='comment')))
         return queryset
+   
     
 
     
