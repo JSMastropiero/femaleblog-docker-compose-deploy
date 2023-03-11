@@ -9,8 +9,8 @@ from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
 from .pagination import *
 from .models import UserVerification
-from django.db.models import Count
-from django.http import JsonResponse
+from rest_framework.views import APIView
+
 
 
 
@@ -61,14 +61,7 @@ class ArticleViewset(viewsets.ModelViewSet):
          serializer = self.get_serializer(obj)
          return Response(serializer.data)
 
-    from django.db.models import Count
 
-    def count_comments_by_article(request):
-        articles = Article.objects.annotate(num_comments=Count('comment'))
-        data = {}
-        for article in articles:
-            data[article.title] = article.num_comments
-        return JsonResponse(data)
 
     
     
@@ -97,3 +90,10 @@ class FileViewset(viewsets.ModelViewSet):
 
 class ProfileViewset(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
+
+
+class ArticleCommentCount(APIView):
+    def get(self, request):
+        articles = Article.objects.all()
+        serializer = ArticleSerializer(articles, many=True)
+        return Response(serializer.data)
