@@ -12,6 +12,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     
+    user = UserSerializer(read_only=True)
+    #user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source="user")
     
     class Meta:
         model = Comment
