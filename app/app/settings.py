@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['ec2-44-204-184-149.compute-1.amazonaws.com', '44.204.184.149']
 
+CSRF_TRUSTED_ORIGINS = ['https://8hf7lrffdl.execute-api.us-east-1.amazonaws.com/']
 
 # Application definition
 
