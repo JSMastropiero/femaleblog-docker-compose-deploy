@@ -84,6 +84,14 @@ class Article(TimeStampedModel, SoftDeletableModel):
 
 class Comment(TimeStampedModel, SoftDeletableModel):
 
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name=('user'),
+        null=True,
+        blank=True 
+    )
+
     content_type = models.ForeignKey(
         ContentType,
         on_delete=models.CASCADE,
