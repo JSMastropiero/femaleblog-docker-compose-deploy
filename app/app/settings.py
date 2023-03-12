@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-syo&l_xt9v%-r-4z+2^hdf3w#6h89f0%nr_g-uv5t25f(9f+8c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+HOST = 'https://8hf7lrffdl.execute-api.us-east-1.amazonaws.com'
+
 ALLOWED_HOSTS = ['ec2-44-204-184-149.compute-1.amazonaws.com', '44.204.184.149']
 
 CSRF_TRUSTED_ORIGINS = ['https://8hf7lrffdl.execute-api.us-east-1.amazonaws.com']
@@ -169,8 +171,8 @@ CORS_ALLOW_METHODS = [
     'PUT',
 ]
 
-STATIC_URL = '/static/static/'
-MEDIA_URL = '/static/media/'
+STATIC_URL = 'https://8hf7lrffdl.execute-api.us-east-1.amazonaws.com/static/static/'
+MEDIA_URL = 'https://8hf7lrffdl.execute-api.us-east-1.amazonaws.com/static/media/'
 
 MEDIA_ROOT = '/vol/web/media'
 STATIC_ROOT = '/vol/web/static'
