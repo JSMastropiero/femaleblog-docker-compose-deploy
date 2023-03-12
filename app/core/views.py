@@ -12,7 +12,7 @@ from .pagination import *
 from .models import UserVerification
 from rest_framework.views import APIView
 from django.db.models import Count
-from rest_framework import generics
+from rest_framework import generics, status
 
 
 
@@ -50,7 +50,6 @@ class UserViewset(viewsets.ModelViewSet):
         return Response({'user': serializer.data, 'token': token.key})
 
 
-
 class ArticleViewset(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
@@ -74,6 +73,25 @@ class CommentViewset(viewsets.ModelViewSet):
     search_fields = ['id', 'content_type', 'object_id']
     pagination_class = CommentPagination
 
+    def create(self, request):
+
+        data = request.data.copy()
+
+        user = request.user.id
+        try:
+            values = data.copy()
+            values.update({'user': user})
+
+            serializer = self.serializer_class(data=values)
+
+            if serializer.is_valid():
+                serializer.save()
+
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        except Exception as ex:
+            print(ex)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class TypeOfFileViewset(viewsets.ModelViewSet):
     queryset = TypeOfFile.objects.all()
@@ -86,6 +104,7 @@ class FileViewset(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('name', 'description', 'user__username', 'user__first_name','user__last_name', 'type_of_file__name')
     pagination_class = FilePagination
+
 
 class ProfileViewset(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
