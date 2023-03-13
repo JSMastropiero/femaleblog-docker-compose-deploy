@@ -73,10 +73,7 @@ class CommentViewset(viewsets.ModelViewSet):
     search_fields = ['id', 'content_type', 'object_id']
     pagination_class = CommentPagination
 
-    from rest_framework.response import Response
-
-class CommentViewset(viewsets.ModelViewSet):
-    # queryset, serializer_class, etc.
+    
 
     def create(self, request):
         data = request.data.copy()
