@@ -15,6 +15,36 @@ class ArticleAdmin(admin.ModelAdmin):
     #autocomplete_fields = ['charger']
 
 
+class CommentAdmin(admin.ModelAdmin):
+    search_fields = [
+        'user',
+        
+    ]
+    list_display = ['id', 'user', 'created', 'modified']
+    #autocomplete_fields = ['charger']
+
+
+class FileAdmin(admin.ModelAdmin):
+    search_fields = [
+        'name',
+        'user',
+        'type_of_file'
+
+        
+    ]
+    list_display = ['id', 'user', 'type_of_file','is_active', 'created', 'modified']
+    #autocomplete_fields = ['charger']
+
+
+class ProfileAdmin(admin.ModelAdmin):
+    search_fields = [
+        'user',
+        
+    ]
+    list_display = ['id', 'user', 'created', 'modified']
+    #autocomplete_fields = ['charger']
+
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment)
 admin.site.register(File)
