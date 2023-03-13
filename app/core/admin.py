@@ -46,8 +46,8 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article, ArticleAdmin)
-admin.site.register(Comment, CommentAdmin)
-admin.site.register(File, FileAdmin)
+admin.site.register(Comment )
+admin.site.register(File)
 admin.site.register(TypeOfFile)
-admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Profile)
 
