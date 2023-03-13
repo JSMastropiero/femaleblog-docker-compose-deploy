@@ -76,37 +76,23 @@ class CommentViewset(viewsets.ModelViewSet):
     
 
     def create(self, request):
-        data = request.data.copy()
-        user = request.user
 
+        data = request.data.copy()
+    
+        user = request.user
         try:
             values = data.copy()
-            values.update({'user': user.id})
-
+            values.update({'user': user})
+            
             serializer = self.serializer_class(data=values)
 
             if serializer.is_valid():
                 serializer.save()
 
-            comment = serializer.instance
-            comment.user = user.username
-            serialized_comment = self.serializer_class(comment)
-
-            return Response({
-                "status": "success",
-                "message": "Comment created successfully",
-                "comment": serialized_comment.data
-            }, status=status.HTTP_202_ACCEPTED)
-
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         except Exception as ex:
             print(ex)
-
-        return Response({
-            "status": "error",
-            "message": "Comment could not be created",
-            "errors": serializer.errors
-        }, status=status.HTTP_400_BAD_REQUEST)
-
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
