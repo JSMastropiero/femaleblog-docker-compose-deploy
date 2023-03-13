@@ -46,7 +46,7 @@ class Admin(admin.ModelAdmin):
 
 
 admin.site.register(Article, ArticleAdmin)
-admin.site.register(Comment, CommentAdmin)
+admin.site.register(Comment)
 admin.site.register(File)
 admin.site.register(TypeOfFile)
 admin.site.register(Profile)
