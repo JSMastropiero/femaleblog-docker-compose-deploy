@@ -77,7 +77,7 @@ class CommentViewset(viewsets.ModelViewSet):
 
         data = request.data.copy()
 
-        user = request.user
+        user = request.user.username
         try:
             values = data.copy()
             values.update({'user': user})
