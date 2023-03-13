@@ -84,10 +84,10 @@ class CommentViewset(viewsets.ModelViewSet):
             serializer = self.serializer_class(data=values)
 
             if serializer.is_valid():
-                serializer.save()
+                comment = serializer.save()
+                comment.user = user.username
+                comment.save()
 
-            comment = serializer.instance
-            comment.user = user.username
             serialized_comment = self.serializer_class(comment)
 
             return Response(serialized_comment.data, status=status.HTTP_202_ACCEPTED)
@@ -95,6 +95,7 @@ class CommentViewset(viewsets.ModelViewSet):
             print(ex)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class TypeOfFileViewset(viewsets.ModelViewSet):
