@@ -1,6 +1,10 @@
 from django.contrib import admin
 from .models import Article, Comment, File, TypeOfFile, Profile
 
+admin.site.site_header = "Administrador Female Christi"
+admin.site.site_title = " Female Christi"
+admin.site.index_title = "Bienvenida"
+
 # Register your models here.
 class ArticleAdmin(admin.ModelAdmin):
     search_fields = [
