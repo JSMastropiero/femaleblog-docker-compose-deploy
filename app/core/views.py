@@ -74,22 +74,26 @@ class CommentViewset(viewsets.ModelViewSet):
     pagination_class = CommentPagination
 
     def create(self, request):
-
         data = request.data.copy()
+        user = request.user
 
-        user = request.user.username
         try:
             values = data.copy()
-            values.update({'user': user})
+            values.update({'user': user.id})
 
             serializer = self.serializer_class(data=values)
 
             if serializer.is_valid():
                 serializer.save()
 
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            comment = serializer.instance
+            comment.user = user.username
+            serialized_comment = self.serializer_class(comment)
+
+            return Response(serialized_comment.data, status=status.HTTP_202_ACCEPTED)
         except Exception as ex:
             print(ex)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
