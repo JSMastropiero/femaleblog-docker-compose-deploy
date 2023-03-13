@@ -73,6 +73,11 @@ class CommentViewset(viewsets.ModelViewSet):
     search_fields = ['id', 'content_type', 'object_id']
     pagination_class = CommentPagination
 
+    from rest_framework.response import Response
+
+class CommentViewset(viewsets.ModelViewSet):
+    # queryset, serializer_class, etc.
+
     def create(self, request):
         data = request.data.copy()
         user = request.user
@@ -84,17 +89,27 @@ class CommentViewset(viewsets.ModelViewSet):
             serializer = self.serializer_class(data=values)
 
             if serializer.is_valid():
-                comment = serializer.save()
-                comment.user = user.username
-                comment.save()
+                serializer.save()
 
+            comment = serializer.instance
+            comment.user = user.username
             serialized_comment = self.serializer_class(comment)
 
-            return Response(serialized_comment.data, status=status.HTTP_202_ACCEPTED)
+            return Response({
+                "status": "success",
+                "message": "Comment created successfully",
+                "comment": serialized_comment.data
+            }, status=status.HTTP_202_ACCEPTED)
+
         except Exception as ex:
             print(ex)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            "status": "error",
+            "message": "Comment could not be created",
+            "errors": serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
