@@ -36,7 +36,7 @@ class FileAdmin(admin.ModelAdmin):
     #autocomplete_fields = ['charger']
 
 
-class ProfileAdmin(admin.ModelAdmin):
+class Admin(admin.ModelAdmin):
     search_fields = [
         'user',
         
@@ -46,7 +46,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article, ArticleAdmin)
-admin.site.register(Comment )
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(File)
 admin.site.register(TypeOfFile)
 admin.site.register(Profile)
