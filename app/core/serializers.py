@@ -44,11 +44,6 @@ class FileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-
-    class meta:
-        model = Profile
-        fields = '__all__'
 
 
 class SuscribeSerializer(serializers.ModelSerializer):
