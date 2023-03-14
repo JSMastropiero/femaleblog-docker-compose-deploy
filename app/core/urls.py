@@ -8,5 +8,8 @@ router.register('api/article', ArticleViewset)
 router.register('api/comment', CommentViewset)
 router.register('api/file', FileViewset)
 router.register('api/type_of_file', TypeOfFileViewset)
+router.register('api/profile', Profile)
+
+
 
 urlpatterns = router.urls

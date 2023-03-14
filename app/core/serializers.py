@@ -27,10 +27,6 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 
-
-
-
-
 class TypeOfFileSerializer(serializers.ModelSerializer):
     
     
@@ -45,4 +41,18 @@ class FileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = File
+        fields = '__all__'
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+
+    class meta:
+        model = Profile
+        fields = '__all__'
+
+
+class SuscribeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Suscribe
         fields = '__all__'

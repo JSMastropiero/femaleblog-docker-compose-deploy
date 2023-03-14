@@ -134,3 +134,8 @@ class ArticleDetail(generics.RetrieveAPIView):
         response_data = serializer.data
         response_data['num_comments'] = num_comments
         return Response(response_data)
+    
+
+class SuscribeViewset(viewsets.ModelViewSet):
+    queryset = Suscribe.objects.all()
+    serializer_class = SuscribeSerializer    

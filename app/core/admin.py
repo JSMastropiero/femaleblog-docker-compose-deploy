@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article, Comment, File, TypeOfFile, Profile
+from .models import Article, Comment, File, TypeOfFile, Profile, Suscribe
 
 admin.site.site_header = "Administrador Female Christi"
 admin.site.site_title = " Female Christi"
@@ -50,4 +50,5 @@ admin.site.register(Comment)
 admin.site.register(File)
 admin.site.register(TypeOfFile)
 admin.site.register(Profile)
+admin.site.register(Suscribe)
 

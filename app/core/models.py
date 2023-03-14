@@ -209,6 +209,19 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+
+class Suscribe(models.Model):
+
+    email = models.EmailField()
+
+    class Meta():
+        verbose_name = ('email')
+        verbose_name_plural = ('emails')
+
+    def __str__(self):
+        return self.email
+    
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
