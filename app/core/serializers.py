@@ -45,9 +45,3 @@ class FileSerializer(serializers.ModelSerializer):
 
 
 
-
-class SuscribeSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Suscribe
-        fields = '__all__'
