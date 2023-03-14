@@ -29,7 +29,7 @@ DEBUG = True
 
 HOST = 'https://8hf7lrffdl.execute-api.us-east-1.amazonaws.com'
 
-ALLOWED_HOSTS = ['ec2-44-204-184-149.compute-1.amazonaws.com', '44.204.184.149']
+ALLOWED_HOSTS = ['ec2-44-203-249-76.compute-1.amazonaws.com', '44.204.184.149']
 
 CSRF_TRUSTED_ORIGINS = ['https://8hf7lrffdl.execute-api.us-east-1.amazonaws.com']
 
