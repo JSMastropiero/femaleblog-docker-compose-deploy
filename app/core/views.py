@@ -114,7 +114,7 @@ class FileViewset(viewsets.ModelViewSet):
 
 class ProfileViewset(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
-
+    serializer_class = ProfileSerializer
 
 class ArticleCommentCount(APIView):
     def get(self, request):
@@ -134,7 +134,7 @@ class ArticleDetail(generics.RetrieveAPIView):
         response_data = serializer.data
         response_data['num_comments'] = num_comments
         return Response(response_data)
-    
+
 
 class SuscribeViewset(viewsets.ModelViewSet):
     queryset = Suscribe.objects.all()
